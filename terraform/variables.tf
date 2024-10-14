@@ -83,12 +83,7 @@ variable "bastion_key_name" {
   default     = "devops-ssh"
 }
 
-variable "bastion_ami_id" {
-  description = "AMI ID for the bastion host"
+variable "ami_id" {
+  description = "AMI ID"
   default     = "ami-054a53dca63de757b" 
-}
-
-variable "public_ip_cidr" {
-  description = "Your public IP address in CIDR notation"
-  type        = string
 }
