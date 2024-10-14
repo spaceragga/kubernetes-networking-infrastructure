@@ -1,5 +1,5 @@
 variable "region" {
-  description = "The AWS region"
+  description = "AWS region"
   type        = string
   default     = "eu-west-1"
 }
@@ -11,27 +11,27 @@ variable "github_actions_role_name" {
 }
 
 variable "repo_name" {
-  description = "The GitHub repository name in the format 'owner/repo'"
+  description = "GitHub repository name (format 'owner/repo')"
   type        = string
   default     = "spaceragga/kubernetes-networking-infrastructure"
 }
 
 variable "client_id_list" {
-  description = "The client ID list for the OIDC provider"
+  description = "Client ID list for the OIDC provider"
   type        = list(string)
   default     = ["sts.amazonaws.com"]
 }
 
 variable "thumbprint_list" {
-  description = "The thumbprint list for the OIDC provider"
+  description = "Thumbprint list for the OIDC provider"
   type        = list(string)
   default     = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
 }
 
 variable "required_iam_policies" {
-  description = "Required IAM Policies"
+  description = "Required IAM policies"
   type        = list(string)
-  default = [
+  default     = [
     "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
     "arn:aws:iam::aws:policy/AmazonRoute53FullAccess",
     "arn:aws:iam::aws:policy/AmazonS3FullAccess",
@@ -67,12 +67,7 @@ variable "private_subnet_2_cidr" {
   default     = "10.0.4.0/24"
 }
 
-variable "az_1" {
-  description = "First availability zone"
-  default     = "eu-west-1a"
-}
-
-variable "az_2" {
-  description = "Second availability zone"
-  default     = "eu-west-1b"
+variable "azs" {
+  description = "Availability Zones"
+  default     = ["eu-west-1a", "eu-west-1b"]
 }
