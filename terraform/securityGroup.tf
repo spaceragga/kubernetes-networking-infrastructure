@@ -45,3 +45,43 @@ resource "aws_security_group" "private_sg" {
     Name = "Private Security Group"
   }
 }
+
+# Security Group for Bastion Host
+resource "aws_security_group" "bastion_sg" {
+  name        = "bastion_sg"
+  description = "Allow SSH access to the bastion host"
+  vpc_id      = aws_vpc.main_vpc.id
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [var.public_ip_cidr]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+  }
+}
+
+# Security Group for Instances in Private Subnets
+resource "aws_security_group" "private_subnet_sg" {
+  vpc_id      = aws_vpc.main_vpc.id
+  name        = "private_subnet_sg"
+  description = "Security group for private subnets"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    security_groups = [aws_security_group.bastion_sg.id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+  }
+}

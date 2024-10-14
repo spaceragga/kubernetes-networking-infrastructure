@@ -71,3 +71,24 @@ variable "azs" {
   description = "Availability Zones"
   default     = ["eu-west-1a", "eu-west-1b"]
 }
+
+variable "bastion_instance_type" {
+  description = "EC2 instance type for the bastion host"
+  default     = "t2.micro"
+}
+
+variable "bastion_key_name" {
+  description = "Name of the SSH key pair"
+  type        = string
+  default     = "devops-ssh"
+}
+
+variable "bastion_ami_id" {
+  description = "AMI ID for the bastion host"
+  default     = "ami-054a53dca63de757b" 
+}
+
+variable "public_ip_cidr" {
+  description = "Your public IP address in CIDR notation"
+  type        = string
+}
